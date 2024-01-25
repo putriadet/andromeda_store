@@ -48,9 +48,7 @@ class Product extends CI_Controller
 
 		$config['upload_path'] = './upload_produk/';
 		$config['allowed_types'] = 'jpg|png|jpeg';
-
 		$this->load->library('upload', $config);
-
 		if ($this->upload->do_upload('foto_produk')) {
 			$data_file = $this->upload->data();
 			$dataInsert = array(
@@ -97,9 +95,7 @@ class Product extends CI_Controller
 
 		$config['upload_path'] = './upload_produk/';
 		$config['allowed_types'] = 'jpg|png|jpeg';
-
 		$this->load->library('upload', $config);
-
 		if ($this->upload->do_upload('foto_produk')) {
 			$data_file = $this->upload->data();
 			$dataUpdate = array(

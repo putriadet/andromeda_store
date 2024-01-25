@@ -11,7 +11,6 @@ public function index()
 		$this->load->view('templates/admin_header', $data);
 		$this->load->view('templates/admin_nav', $dataUser);
 		$this->load->view('pages/admin/index', $data);
-		$this->load->view('templates/admin_footer');
 	}
 
 	public function __construct() {

@@ -1,3 +1,21 @@
+<style>
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .table-responsive table {
+        width: 100%;
+        white-space: nowrap;
+    }
+
+    .table-responsive th,
+    .table-responsive td {
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+</style>
+
+
 <div class="container-fluid">
 
 	<!-- Page Heading -->
@@ -28,26 +46,24 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<?php
-						$no = 1;
-						foreach ($produk as $item) { ?>
-					</tr>
-					<tr>
-						<td><?php echo $no++; ?></td>
-						<td><?php echo $item->namaProduk; ?></td>
-						<td><?php echo $item->namaKATEGORI; ?></td>
-						<td><?php echo $item->foto; ?></td>
-						<td><?php echo $item->harga; ?></td>
-						<td><?php echo $item->stok; ?></td>
-						<td><?php echo $item->berat; ?></td>
-						<td><?php echo $item->deskripsiProduk; ?></td>
-						<td>
-							<a href="<?php echo site_url('product/getid/' . $item->idProduk); ?>" class="btn btn-warning">Edit</a>
-							<a href="<?php echo site_url('product/hapus/' . $item->idProduk); ?>" class="btn btn-danger" onclick="return confirm('Anda Yakin Ingin Menghapus Data Ini');">Hapus</a>
-						</td>
-					</tr>
-				<?php } ?>
+					<?php
+					$no = 1;
+					foreach ($produk as $item) { ?>
+						<tr>
+							<td><?php echo $no++; ?></td>
+							<td><?php echo $item->namaProduk; ?></td>
+							<td><?php echo $item->namaKATEGORI; ?></td>
+							<td><?php echo $item->foto; ?></td>
+							<td><?php echo $item->harga; ?></td>
+							<td><?php echo $item->stok; ?></td>
+							<td><?php echo $item->berat; ?></td>
+							<td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><?php echo $item->deskripsiProduk; ?></td>
+							<td>
+								<a href="<?php echo site_url('product/getid/' . $item->idProduk); ?>" class="btn btn-warning">Edit</a>
+								<a href="<?php echo site_url('product/hapus/' . $item->idProduk); ?>" class="btn btn-danger" onclick="return confirm('Anda Yakin Ingin Menghapus Data Ini');">Delete</a>
+							</td>
+						</tr>
+					<?php } ?>
 				</tbody>
 			</table>
 		</div>

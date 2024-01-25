@@ -10,8 +10,7 @@
 	<meta name="author" content="">
 
 	<!-- Favicons -->
-	<link href="<?= base_url('assets/user/'); ?>img/favicon.png" rel="icon">
-
+	<link href="<?= base_url('assets/user/'); ?>images/icons/favicon-32x32.png" rel="icon">
 	<title><?= $title ?></title>
 
 	<!-- Custom fonts for this template-->

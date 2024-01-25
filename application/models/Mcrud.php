@@ -74,19 +74,19 @@ class Mcrud extends CI_Model
 
 	public function get_kategori_women()
 	{
-		$q = $this->db->query("SELECT * FROM tbl_produk where idkat=7");
+		$q = $this->db->query("SELECT * FROM tbl_produk where idkat=3");
 		return $q;
 	}
 
 	public function get_kategori_men()
 	{
-		$q = $this->db->query("SELECT * FROM tbl_produk where idkat=5");
+		$q = $this->db->query("SELECT * FROM tbl_produk where idkat=1");
 		return $q;
 	}
 
 	public function get_kategori_accesories()
 	{
-		$q = $this->db->query("SELECT * FROM tbl_produk where idkat=6");
+		$q = $this->db->query("SELECT * FROM tbl_produk where idkat=2");
 		return $q;
 	}
 

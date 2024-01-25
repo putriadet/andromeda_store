@@ -128,22 +128,23 @@ class Snap extends CI_Controller {
 		echo $snapToken;
     }
 
-    public function finish()
+	public function finish()
 	{
 		$result = json_decode($this->input->post('result_data'), true);
-		// echo "<pre>";
-		// 	var_dump($result);
-		// echo "<pre>";
-		// echo $result['va_numbers'][0]["bank"];
-		// die;
+	
+		// Check if 'bank' and 'va_number' are null, if so, set them to 'N/A'
+		$bank = isset($result['va_numbers'][0]["bank"]) ? $result['va_numbers'][0]["bank"] : 'N/A';
+		$vaNumber = isset($result['va_numbers'][0]["va_number"]) ? $result['va_numbers'][0]["va_number"] : 'N/A';
+		$pdf = isset($result['pdf_url']) ? $result: 'N/A';
+		
+
 		$data = [
 			'order_id' => $result['order_id'],
 			'gross_amount' => $result['gross_amount'],
 			'payment_type' => $result['payment_type'],
 			'transaction_time' => $result['transaction_time'],
-			'bank' => $result['va_numbers'][0]["bank"],
-			'va_number' => $result['va_numbers'][0]["va_number"],
-			'pdf_url' => $result['pdf_url'],
+			'bank' => $bank,
+			'va_number' => $vaNumber,
 			'status_code' => $result['status_code'],
 		];
 	

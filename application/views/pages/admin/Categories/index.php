@@ -31,7 +31,7 @@
 						<td><?php echo $item->namakat; ?></td>
 						<td>
 							<a href="<?php echo site_url('categories/getid/' . $item->idkat); ?>" class="btn btn-warning">Edit</a>
-							<a href="<?php echo site_url('categories/hapus/' . $item->idkat); ?>" class="btn btn-danger" onclick="return confirm('Anda Yakin Ingin Menghapus Data Ini');">Hapus</a>
+							<a href="<?php echo site_url('categories/hapus/' . $item->idkat); ?>" class="btn btn-danger" onclick="return confirm('Anda Yakin Ingin Menghapus Data Ini');">Delete</a>
 						</td>
 					</tr>
 				<?php } ?>
@@ -40,3 +40,6 @@
 		</div>
 	</div>
 </div
+<br>
+<br>
+<br>
