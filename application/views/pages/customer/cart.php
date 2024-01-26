@@ -186,30 +186,28 @@
 			</div>
 			
 			<div class="header-cart-content flex-w js-pscroll">
-				<?php
-				foreach ($this->cart->contents() as $items) : ?>
-				<ul class="header-cart-wrapitem w-full">
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="<?= base_url('assets/user/'); ?>images/item-cart-01.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-							<?php echo $items['name'] ?>
-							</a>
-
-							<span class="header-cart-item-info">
-							Rp<?php echo number_format($items['price'], 0, ',', '.')?> x <?php echo $items['qty'] ?>
-							</span>
-						</div>
-					</li>
-					<?php endforeach; ?>
+				<?php foreach ($this->cart->contents() as $items) : ?>
+					<ul class="header-cart-wrapitem w-full">
+						<li class="header-cart-item flex-w flex-t m-b-12">
+							<div class="header-cart-item-img">
+								<img src="<?php echo base_url('upload_produk/' . $items['gambar']); ?>" alt="Product Image">
+							</div>
+							<div class="header-cart-item-txt p-t-8">
+								<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+									<?php echo $items['name'] ?>
+								</a>
+								<span class="header-cart-item-info">
+									Rp<?php echo number_format($items['price'], 0, ',', '.') ?> x <?php echo $items['qty'] ?>
+								</span>
+							</div>
+						</li>
+					</ul>
+				<?php endforeach; ?>
 				<div class="header-cart-total w-full p-tb-40">
 					Rp <?php echo number_format($this->cart->total(), 0, ',', '.') ?>
 				</div>
 			</div>
-			
+
 				<div class="w-full">
 					<div class="header-cart-buttons flex-w w-full">
 						<a href="<?= site_url('Transaksi'); ?>" class="flex-c-m stext-101 cl0 size-119 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
@@ -263,8 +261,7 @@
 								<tr class="table_row">
 									<td class="column-1">
 										<div class="how-itemcart1">
-											<!-- <?php echo base_url('assets/foto_produk/'.$item['image']);?> -->
-										<img src="<?php echo base_url($items['gambar']); ?>" alt="IMG">
+									 		<img src="<?php echo base_url('upload_produk/' . $items['gambar']); ?>" alt="Product Image">
 										</div>
 									</td>
 									<td class="column-2" id="name"><?php echo $items['name'] ?></td>
@@ -276,20 +273,6 @@
 								<?php endforeach; ?>
 								</tr>
 							</table>
-						</div>
-
-						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
-							<div class="flex-w flex-m m-r-20 m-tb-5">
-								<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Coupon Code">
-									
-								<div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
-									Apply coupon
-								</div>
-							</div>
-
-							<div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-								Update Cart
-							</div>
 						</div>
 					</div>
 				</div>
@@ -321,17 +304,6 @@
 								</span>
 							</div>				
 								<div class="p-t-15">
-									<!-- <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-										<select class="js-select2" name="kotaAsal">
-											<option>From city</option>
-											<?php if ($kota && isset($kota->rajaongkir->results[0])): ?>
-											<?php $kt = $kota->rajaongkir->results[0]; ?>
-												<option value="<?php echo $kt->city_id ?>"><?php echo $kt->city_name ?></option>
-											<?php endif ?>
-										</select>
-										<div class="dropDownSelect2"></div>
-									</div> -->
-
 									<div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
 										<select class="js-select2" name="kotaTujuan">
 											<option>Select a City</option>
@@ -357,12 +329,12 @@
 									</div>
 
 									<div class="bor8 bg0 m-b-22">
-										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Postcode / Zip">
+										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Your Address">
 									</div>
 									
 									<div class="flex-w">
 										<div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
-										<input type="submit" value="Update Totals" name="submit">
+										<input type="submit" value="Update Totals" name="submit" class="stext-101">
 										</div>
 									</div>	
 								</div>

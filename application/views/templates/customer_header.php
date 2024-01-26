@@ -217,7 +217,7 @@
 				<ul class="header-cart-wrapitem w-full">
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
-							<img src="<?= base_url('assets/user/'); ?>images/item-cart-01.jpg" alt="IMG">
+						<img src="<?php echo base_url('upload_produk/' . $items['gambar']); ?>" alt="Product Image">
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">

@@ -126,45 +126,35 @@ class Transaksi extends CI_Controller
 
 
 	public function add_to_cart($idProduk)
-	{
+{
+    // Login Session
+    if (!$this->session->userdata('email')) {
+        redirect('auth');
+    }
 
-		// Login Session
-		if(!$this->session->userdata('email')){
-			redirect('auth');
-		}
-		// Load the model or library to fetch product details
-		$produk = $this->Mtransaksi->find($idProduk);
+    $produk = $this->Mtransaksi->find($idProduk);
+    if ($produk) {
+        if ($produk->stok > 0) {
+            $data = array(
+                'id'      => $produk->idProduk,
+                'qty'     => 1,
+                'price'   => $produk->harga,
+                'name'    => $produk->namaProduk,
+                'gambar' => array('gambar' => $produk->foto)
+            );
 
-		// Check if the product is found
-		if ($produk) {
-			// Check if there is enough stock
-			if ($produk->stok > 0) {
-				// Add the product to the cart
-				$data = array(
-					'id'      => $produk->idProduk,
-					'qty'     => 1,
-					'price'   => $produk->harga,
-					'name'    => $produk->namaProduk,
-					'gambar'  => $produk->foto
-				);
-
-				$this->cart->insert($data);
-
-				// Update the product quantity in the database (reduce stock)
-				$this->Mtransaksi->reduceStock($idProduk, 1);
-
-				// Redirect to the Transaksi page
-				redirect('Transaksi');
-			} else {
-				// Stock is 0, show a warning message
-				$this->session->set_flashdata('stock_warning', 'This product is out of stock!');
-				redirect('Transaksi');
-			}
-		} else {
-			// Handle the case when the product is not found
-			redirect('Transaksi'); // or show an error message
-		}
-	}
+            $this->cart->insert($data);
+            $this->Mtransaksi->reduceStock($idProduk, 1);
+            redirect('Transaksi');
+        } else {
+            // Stock is 0, show a warning message
+            $this->session->set_flashdata('stock_warning', 'This product is out of stock!');
+            redirect('Transaksi');
+        }
+    } else {
+        redirect('Transaksi');
+    }
+}
 
 
 	public function delete_cart()
