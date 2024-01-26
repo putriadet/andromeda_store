@@ -29,11 +29,18 @@ class Auth extends CI_Controller
 		$email = $this->input->post('email');
 		$password = $this->input->post('password');
 
+		// Validasi input email dan password
+		if (empty($email) || empty($password)) {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email and password are required</div>');
+			redirect('auth');
+			return;
+		}
+
 		$user = $this->db->get_where('user', ['email' => $email])->row_array();
 		if ($user) {
-			//user aktif
+			// User aktif
 			if ($user['active'] == 1) {
-				//cek password
+				// Cek password
 				if (password_verify($password, $user['password'])) {
 					$data = [
 						'email' => $user['email'],
@@ -46,24 +53,25 @@ class Auth extends CI_Controller
 						redirect('user');
 					}
 				} else {
-					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong Password
-                    </div>');
+					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong Password</div>');
 					redirect('auth');
 				}
 			} else {
-				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">This email has not been actived
-                </div>');
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">This email has not been activated</div>');
 				redirect('auth');
 			}
 		} else {
-			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email is not registed
-            </div>');
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email or password is not registered</div>');
+			redirect('auth');
 		}
 	}
 
+
 	public function register()
 	{
-		$this->form_validation->set_rules('name', 'Name', 'required|trim');
+		$this->form_validation->set_rules('name', 'Name', 'required|trim|regex_match[/[^\s]/]', [
+			'regex_match' => 'Name field should not only contain spaces.'
+		]);
 		$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
 			'is_unique' => 'This Email has Already Register'
 		]);
@@ -73,6 +81,7 @@ class Auth extends CI_Controller
 		]);
 		$this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
 
+		
 		if ($this->form_validation->run() == false) {
 			$data['title'] = "Andromeda Store";
 			$this->load->view('templates/auth_header', $data);
